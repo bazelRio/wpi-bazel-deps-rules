@@ -1,0 +1,13 @@
+load("@wpi_bazel_rules//rules:cc.bzl", "wpilib_cc_library")
+load("@wpi_bazel_rules//rules:wpilib_repo.bzl", "make_cpp_alias")
+
+make_cpp_alias("imgui")
+
+wpilib_cc_library(
+    name = "imgui",
+    raw_deps = [
+        "@imgui-headers//:headers",
+        ":imgui-libs",
+    ],
+    visibility = ["//visibility:public"],
+)

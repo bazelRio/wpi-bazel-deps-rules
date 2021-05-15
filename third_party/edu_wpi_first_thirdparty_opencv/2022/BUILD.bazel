@@ -1,0 +1,26 @@
+load("@wpi_bazel_rules//rules:cc.bzl", "wpilib_cc_library")
+load("@wpi_bazel_rules//rules:wpilib_repo.bzl", "make_cpp_alias")
+
+make_cpp_alias("opencv-cpp")
+
+wpilib_cc_library(
+    name = "opencv-cpp",
+    raw_deps = [
+        "@opencv-cpp-headers//:headers",
+        ":opencv-cpp-libs",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+wpilib_cc_library(
+    name = "xxshared",
+    srcs = [":opencv-cpp-shared-libs"],
+    linkstatic = True,
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "edu_wpi_first_thirdparty_opencv_opencv_java",
+    actual = "@maven//:edu_wpi_first_thirdparty_frc2022_opencv_opencv_java",
+    visibility = ["//visibility:public"],
+)
