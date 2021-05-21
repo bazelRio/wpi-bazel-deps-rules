@@ -14,7 +14,7 @@ def third_party_opencv():
             ("osxx86-64", "bf6321427b66a31f4330398e7cfd9a78209fd769ac898dd8264f914561c023f8"),
             ("windowsx86-64", "d8723747f4d5a69c693951ec6cf0fb649f8a644786783b936bc15148cceebb38"),
             ("linuxathena", None),
-            ("linuxraspbiandebug", None),
+            ("linuxraspbian", None),
             ("linuxaarch64bionic", None),
         ],
         shared_lib_srcs = 'glob(["**/*.dll", "**/*.so*", "**/*.dylib"], exclude=["**/libopencv_java347.dylib"])',
