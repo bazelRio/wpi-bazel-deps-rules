@@ -1,5 +1,3 @@
-load("@wpi_bazel_rules//rules:wpilib_repo.bzl", "wpilib_native_dependency")
-
 def imgui_version_conf_impl(repository_ctx):
     year = str(repository_ctx.attr.year)
 

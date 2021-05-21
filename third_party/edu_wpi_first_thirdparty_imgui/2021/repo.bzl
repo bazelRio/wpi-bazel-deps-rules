@@ -1,7 +1,6 @@
 load("@wpi_bazel_rules//rules:wpilib_repo.bzl", "wpilib_native_dependency")
 
 def third_party_imgui():
-    print("Calling the real thing")
     wpilib_native_dependency(
         "imgui",
         "1.79-1",

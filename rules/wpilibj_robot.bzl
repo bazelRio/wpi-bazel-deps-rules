@@ -1,4 +1,4 @@
-load("@rules_java//java:defs.bzl", "java_library", "java_test")
+load("@rules_java//java:defs.bzl", "java_library")
 load("@wpi_bazel_rules//rules:java.bzl", "wpilib_java_binary", "wpilib_junit5_test")
 load("@wpi_bazel_rules//rules:halsim_binary.bzl", "wpilib_java_halsim_binary")
 
@@ -59,4 +59,5 @@ def wpilibj_robot(
             wpi_shared_deps = ["@local_allwpilib//:wpilibj-jni_deps"],
             runtime_deps = [":lib"],
             main_class = main_class,
+            visibility = ["//visibility:public"],
         )
