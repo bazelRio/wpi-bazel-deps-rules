@@ -1,5 +1,6 @@
 load("@wpi_bazel_deps//third_party/edu_wpi_first_thirdparty_imgui:load_imgui.bzl", "load_imgui")
 load("@wpi_bazel_deps//third_party/edu_wpi_first_thirdparty_opencv:load_opencv.bzl", "load_opencv")
+load("@wpi_bazel_deps//third_party/com_ni_libraries:load_ni_libraries.bzl", "load_ni")
 
 def allwpilib_version_conf_impl(repository_ctx):
     if repository_ctx.attr.build_from_source:
@@ -29,5 +30,6 @@ def load_allwpilib(build_from_source, year, local_repository_location = None):
             )
 
     allwpilib_version_conf(name = "local_allwpilib", build_from_source = build_from_source)
-    load_opencv(year)
-    load_imgui(year)
+    load_opencv(version="3.4.7-5" if year == 2021 else "4.5.2-1")
+    load_imgui(version="1.79-1" if year == 2021 else "1.82-1")
+    load_ni("2020.10.1")

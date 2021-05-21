@@ -4,35 +4,35 @@ load("@wpi_bazel_rules//rules:cc.bzl", "wpilib_cc_library")
 
 package(default_visibility = ["//visibility:public"])
 
-make_cpp_alias(name = "wpimath-cpp")
+make_cpp_alias(name = "allwpilib-wpimath-cpp")
 
-make_cpp_alias(name = "wpiutil-cpp")
+make_cpp_alias(name = "allwpilib-wpiutil-cpp")
 
-make_cpp_alias(name = "ntcore-cpp")
+make_cpp_alias(name = "allwpilib-ntcore-cpp")
 
-make_cpp_alias(name = "cscore-cpp")
+make_cpp_alias(name = "allwpilib-cscore-cpp")
 
-make_cpp_alias(name = "hal-cpp")
+make_cpp_alias(name = "allwpilib-hal-cpp")
 
-make_cpp_alias(name = "wpigui-cpp")
+make_cpp_alias(name = "allwpilib-wpigui-cpp")
 
-make_cpp_alias(name = "libglass")
+make_cpp_alias(name = "allwpilib-libglass")
 
-make_cpp_alias(name = "libglassnt")
+make_cpp_alias(name = "allwpilib-libglassnt")
 
-make_cpp_alias(name = "wpilibc-cpp")
+make_cpp_alias(name = "allwpilib-wpilibc-cpp")
 
-make_cpp_alias(name = "halsim_gui")
+make_cpp_alias(name = "allwpilib-wpilibNewCommands-cpp")
 
-make_cpp_alias(name = "halsim_ws_client")
+make_cpp_alias(name = "allwpilib-wpilibOldCommands-cpp")
 
-make_cpp_alias(name = "halsim_ws_server")
+make_cpp_alias(name = "allwpilib-halsim_gui")
 
-make_cpp_alias(name = "halsim_ds_socket")
+make_cpp_alias(name = "allwpilib-halsim_ws_client")
 
-make_cpp_alias(name = "wpilibNewCommands-cpp")
+make_cpp_alias(name = "allwpilib-halsim_ws_server")
 
-make_cpp_alias(name = "wpilibOldCommands-cpp")
+make_cpp_alias(name = "allwpilib-halsim_ds_socket")
 
 alias(
     name = "wpimath-java",
@@ -74,150 +74,197 @@ alias(
     actual = "@maven//:edu_wpi_first_wpilibNewCommands_wpilibNewCommands_java",
 )
 
-make_jni_alias(name = "wpi_native__edu_wpi_first_ntcore__ntcore_cpp")
-
-make_jni_alias(name = "wpi_native__edu_wpi_first_cscore__cscore_cpp")
-
-make_jni_alias(name = "wpi_native__edu_wpi_first_wpimath__wpimath_cpp")
-
-make_jni_alias(name = "wpi_native__edu_wpi_first_wpiutil__wpiutil_cpp")
-
-make_jni_alias(name = "wpi_native__edu_wpi_first_hal__hal_cpp")
-
 alias(
-    name = "ntcorejni",
-    actual = ":wpi_native__edu_wpi_first_ntcore__ntcore_cpp-jni-lib",
+    name = "wpilibOldCommands-java",
+    actual = "@maven//:edu_wpi_first_wpilibOldCommands_wpilibOldCommands_java",
 )
 
-alias(
-    name = "cscorejni",
-    actual = ":wpi_native__edu_wpi_first_cscore__cscore_cpp-jni-lib",
-)
+make_jni_alias(name = "allwpilib-java-native__edu_wpi_first_wpimath__wpimath_cpp")
+
+make_jni_alias(name = "allwpilib-java-native__edu_wpi_first_wpiutil__wpiutil_cpp")
+
+make_jni_alias(name = "allwpilib-java-native__edu_wpi_first_ntcore__ntcore_cpp")
+
+make_jni_alias(name = "allwpilib-java-native__edu_wpi_first_cscore__cscore_cpp")
+
+make_jni_alias(name = "allwpilib-java-native__edu_wpi_first_hal__hal_cpp")
+
 
 alias(
     name = "wpimathjni",
-    actual = ":wpi_native__edu_wpi_first_wpimath__wpimath_cpp-jni-lib",
+    actual = ":allwpilib-java-native__edu_wpi_first_wpimath__wpimath_cpp-jni-lib",
 )
 
 alias(
     name = "wpiutiljni",
-    actual = ":wpi_native__edu_wpi_first_wpiutil__wpiutil_cpp-jni-lib",
+    actual = ":allwpilib-java-native__edu_wpi_first_wpiutil__wpiutil_cpp-jni-lib",
+)
+
+alias(
+    name = "ntcorejni",
+    actual = ":allwpilib-java-native__edu_wpi_first_ntcore__ntcore_cpp-jni-lib",
+)
+
+alias(
+    name = "cscorejni",
+    actual = ":allwpilib-java-native__edu_wpi_first_cscore__cscore_cpp-jni-lib",
 )
 
 alias(
     name = "haljni",
-    actual = ":wpi_native__edu_wpi_first_hal__hal_cpp-jni-lib",
-)
-
-filegroup(
-    name = "wpilibj-jni_deps",
-    srcs = [
-        ":cscore-jni",
-        ":hal-jni",
-        ":ntcore-jni",
-        ":wpimath-jni",
-        ":wpiutil-jni",
-    ],
+    actual = ":allwpilib-java-native__edu_wpi_first_hal__hal_cpp-jni-lib",
 )
 
 wpilib_cc_library(
     name = "wpimath-cpp",
-    raw_deps = [
-        "@wpimath-cpp-headers//:headers",
-        ":wpimath-cpp-libs",
+    srcs = [
+        ":allwpilib-wpimath-cpp-shared-libs",
     ],
-)
-
-wpilib_cc_library(
-    name = "wpilibNewCommands-cpp",
     raw_deps = [
-        "@wpilibNewCommands-cpp-headers//:headers",
-        ":wpilibNewCommands-cpp-libs",
+        "@allwpilib-wpimath-cpp-headers//:headers",
+        ":allwpilib-wpimath-cpp-libs",
     ],
-)
-
-wpilib_cc_library(
-    name = "wpilibOldCommands-cpp",
-    raw_deps = [
-        "@wpilibOldCommands-cpp-headers//:headers",
-        ":wpilibOldCommands-cpp-libs",
-    ],
+    linkstatic=1,
 )
 
 wpilib_cc_library(
     name = "wpiutil-cpp",
-    raw_deps = [
-        "@wpiutil-cpp-headers//:headers",
-        ":wpiutil-cpp-libs",
+    srcs = [
+        ":allwpilib-wpiutil-cpp-shared-libs",
     ],
+    raw_deps = [
+        "@allwpilib-wpiutil-cpp-headers//:headers",
+        ":allwpilib-wpiutil-cpp-libs",
+    ],
+    linkstatic=1,
 )
 
 wpilib_cc_library(
     name = "ntcore-cpp",
-    raw_deps = [
-        "@ntcore-cpp-headers//:headers",
-        ":ntcore-cpp-libs",
+    srcs = [
+        ":allwpilib-ntcore-cpp-shared-libs",
     ],
+    raw_deps = [
+        "@allwpilib-ntcore-cpp-headers//:headers",
+        ":allwpilib-ntcore-cpp-libs",
+    ],
+    linkstatic=1,
+)
+
+wpilib_cc_library(
+    name = "cscore-cpp",
+    srcs = [
+        ":allwpilib-cscore-cpp-shared-libs",
+    ],
+    raw_deps = [
+        "@allwpilib-cscore-cpp-headers//:headers",
+        ":allwpilib-cscore-cpp-libs",
+    ],
+    linkstatic=1,
+)
+
+wpilib_cc_library(
+    name = "hal-cpp",
+    srcs = [
+        ":allwpilib-hal-cpp-shared-libs",
+    ],
+    raw_deps = [
+        "@allwpilib-hal-cpp-headers//:headers",
+        ":allwpilib-hal-cpp-libs",
+    ],
+    linkstatic=1,
+)
+
+wpilib_cc_library(
+    name = "wpilibc-cpp",
+    srcs = [
+        ":allwpilib-wpilibc-cpp-shared-libs",
+    ],
+    raw_deps = [
+        "@allwpilib-wpilibc-cpp-headers//:headers",
+        ":allwpilib-wpilibc-cpp-libs",
+    ],
+    linkstatic=1,
+)
+
+wpilib_cc_library(
+    name = "wpilibNewCommands-cpp",
+    srcs = [
+        ":allwpilib-wpilibNewCommands-cpp-shared-libs",
+    ],
+    raw_deps = [
+        "@allwpilib-wpilibNewCommands-cpp-headers//:headers",
+        ":allwpilib-wpilibNewCommands-cpp-libs",
+    ],
+    linkstatic=1,
+)
+
+wpilib_cc_library(
+    name = "wpilibOldCommands-cpp",
+    srcs = [
+        ":allwpilib-wpilibOldCommands-cpp-shared-libs",
+    ],
+    raw_deps = [
+        "@allwpilib-wpilibOldCommands-cpp-headers//:headers",
+        ":allwpilib-wpilibOldCommands-cpp-libs",
+    ],
+    linkstatic=1,
 )
 
 wpilib_cc_library(
     name = "wpigui-cpp",
     raw_deps = [
-        "@wpigui-cpp-headers//:headers",
-        ":wpigui-cpp-libs",
+        "@allwpilib-wpigui-cpp-headers//:headers",
+        ":allwpilib-wpigui-cpp-libs",
     ],
 )
 
 wpilib_cc_library(
     name = "libglass",
     raw_deps = [
-        "@libglass-headers//:headers",
-        ":libglass-libs",
+        "@allwpilib-libglass-headers//:headers",
+        ":allwpilib-libglass-libs",
     ],
 )
 
 wpilib_cc_library(
     name = "libglassnt",
     raw_deps = [
-        "@libglassnt-headers//:headers",
-        ":libglassnt-libs",
+        "@allwpilib-libglassnt-headers//:headers",
+        ":allwpilib-libglassnt-libs",
     ],
 )
 
-wpilib_cc_library(
-    name = "wpilibc-cpp",
-    raw_deps = [
-        "@wpilibc-cpp-headers//:headers",
-        ":wpilibc-cpp-libs",
-    ],
-)
-
-wpilib_cc_library(
-    name = "hal-cpp",
-    raw_deps = [
-        "@hal-cpp-headers//:headers",
-        ":hal-cpp-libs",
-    ],
-)
 
 alias(
     name = "halsim_gui",
-    actual = ":halsim_gui-shared-libs",
+    actual = ":allwpilib-halsim_gui-shared-libs",
 )
 
 alias(
     name = "halsim_ws_client",
-    actual = ":halsim_ws_client-shared-libs",
+    actual = ":allwpilib-halsim_ws_client-shared-libs",
 )
 
 alias(
     name = "halsim_ws_server",
-    actual = ":halsim_ws_server-shared-libs",
+    actual = ":allwpilib-halsim_ws_server-shared-libs",
 )
 
 alias(
     name = "halsim_ds_socket",
-    actual = ":halsim_ds_socket-shared-libs",
+    actual = ":allwpilib-halsim_ds_socket-shared-libs",
+)
+
+filegroup(
+    name = "wpilibj-jni_deps",
+    srcs = [
+        ":cscorejni",
+        ":haljni",
+        ":ntcorejni",
+        ":wpimathjni",
+        ":wpiutiljni",
+    ],
 )
 
 wpilib_cc_library(
@@ -227,6 +274,7 @@ wpilib_cc_library(
         ":wpiutil-cpp",
         ":wpilibc-cpp",
         ":ntcore-cpp",
+        ":cscore-cpp",
         ":hal-cpp",
     ],
 )
@@ -234,11 +282,12 @@ wpilib_cc_library(
 java_library(
     name = "wpilibj-deps",
     exports = [
-        "@maven//:edu_wpi_first_cameraserver_cameraserver_java",
-        "@maven//:edu_wpi_first_cscore_cscore_java",
-        "@maven//:edu_wpi_first_ntcore_ntcore_java",
-        "@maven//:edu_wpi_first_wpilibj_wpilibj_java",
-        "@maven//:edu_wpi_first_wpimath_wpimath_java",
-        "@maven//:edu_wpi_first_wpiutil_wpiutil_java",
+        ":cameraserver-java",
+        ":cscore-java",
+        ":ntcore-java",
+        ":wpilibj-java",
+        ":wpimath-java",
+        ":wpiutil-java",
+        ":hal-java",
     ],
 )

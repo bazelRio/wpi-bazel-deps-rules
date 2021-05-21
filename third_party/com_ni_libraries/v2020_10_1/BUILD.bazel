@@ -4,16 +4,6 @@ load("@wpi_bazel_rules//rules:cc.bzl",  "wpilib_cc_library")
 
 package(default_visibility = ["//visibility:public"])
 
-# cc_import(
-#     name = ""
-# )
-
-# cc_import(
-#   name = "netcom",
-#   hdrs = "@ni-netcomm-headers//:headers",
-#   shared_library = "libmylib.so",
-# )
-
 wpilib_cc_library(
     name = "ni-libraries",
     srcs = [
@@ -30,16 +20,3 @@ wpilib_cc_library(
     ],
     linkstatic=1,
 )
-
-# wpilib_cc_library(
-#     name = "ni-libraries",
-#     raw_deps = [
-#         "@ni-netcomm-linuxathena-libs//:netcomm",
-#         "@ni-chipobject-linuxathena-libs//:chipobject",
-#         "@ni-visa-linuxathena-libs//:visa",
-#         "@ni-netcomm-headers//:headers",
-#         "@ni-chipobject-headers//:headers",
-#         "@ni-visa-headers//:headers",
-#     ],
-#     # linkstatic=1,
-# )

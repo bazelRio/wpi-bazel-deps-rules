@@ -1,13 +1,14 @@
 def opencv_version_conf_impl(repository_ctx):
-    year = str(repository_ctx.attr.year)
+    version = str(repository_ctx.attr.version)
+    flattened_version = "v" + version.replace(".", "_").replace("-", "_")
 
     repository_ctx.symlink(
-        repository_ctx.path(Label("@wpi_bazel_deps//third_party/edu_wpi_first_thirdparty_opencv/" + year + ":BUILD.bazel")),
+        repository_ctx.path(Label("@wpi_bazel_deps//third_party/edu_wpi_first_thirdparty_opencv/" + flattened_version + ":BUILD.bazel")),
         "BUILD.bazel",
     )
 
     repository_ctx.symlink(
-        repository_ctx.path(Label("@wpi_bazel_deps//third_party/edu_wpi_first_thirdparty_opencv/" + year + ":repo.bzl")),
+        repository_ctx.path(Label("@wpi_bazel_deps//third_party/edu_wpi_first_thirdparty_opencv/" + flattened_version + ":repo.bzl")),
         "repo.bzl",
     )
 
@@ -15,9 +16,9 @@ opencv_version_conf = repository_rule(
     implementation = opencv_version_conf_impl,
     configure = True,
     attrs = {
-        "year": attr.int(mandatory = True),
+        "version": attr.string(mandatory = True),
     },
 )
 
-def load_opencv(year):
-    opencv_version_conf(name = "local_opencv", year = year)
+def load_opencv(version):
+    opencv_version_conf(name = "local_opencv", version = version)
