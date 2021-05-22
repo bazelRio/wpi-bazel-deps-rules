@@ -14,7 +14,7 @@ def third_party_opencv():
             ("linuxraspbian", "17c9cfcccf2599137adb0b1973d28580d102f55f21a4bc3f8c9673c2e4b3f3a6"),
             ("linuxaarch64bionic", "9baf066738417fd31700b80d3ec586715888ccf36723d67f2ac6418be5c3f28c"),
         ],
-        shared_lib_srcs = 'glob(["**/*.dll", "**/*.so*", "**/*.dylib"], exclude=["**/libopencv_java347.dylib"])',
+        shared_lib_srcs = 'glob(["**/*.dll", "**/*.so*", "**/*.dylib"], exclude=["**/libopencv_java452.dylib"])',
     )
 
 def third_party_opencv_java_version():
