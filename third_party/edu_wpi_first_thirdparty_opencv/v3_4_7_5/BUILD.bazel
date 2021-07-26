@@ -21,6 +21,6 @@ wpilib_cc_library(
 
 alias(
     name = "edu_wpi_first_thirdparty_opencv_opencv_java",
-    actual = "@maven//:edu_wpi_first_thirdparty_frc2021_opencv_opencv_java",
+    actual = "@opencv-java//jar",
     visibility = ["//visibility:public"],
 )

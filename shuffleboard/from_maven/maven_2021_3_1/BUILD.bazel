@@ -1,0 +1,21 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "api",
+    exports = [
+        #        "@maven//:org_fxmisc_easybind_easybind",
+        #        "@maven//:org_openjfx_javafx_base",
+        #        "@maven//:org_openjfx_javafx_controls",
+        #        "@maven//:org_openjfx_javafx_fxml",
+        #        "@maven//:org_openjfx_javafx_graphics",
+        "@shuffleboard_api//jar",
+        #        "@maven//:com_google_guava_guava"
+    ],
+)
+
+alias(
+    name = "app",
+    actual = "@shuffleboard_app//jar",
+)

@@ -17,7 +17,6 @@ def wpilibc_robot(
     )
 
     test_srcs = native.glob(["src/test/cpp/**/*.cpp"])
-    print(name, test_srcs)
     if test_srcs:
         wpilib_cc_test(
             name = "test",
@@ -32,4 +31,5 @@ def wpilibc_robot(
             name = name,
             halsim_deps = halsim_deps,
             raw_deps = [":lib"],
+            visibility = ["//visibility:public"],
         )
