@@ -1,0 +1,22 @@
+
+
+load("@wpi_bazel_rules//rules:cc.bzl",  "wpilib_cc_library")
+
+package(default_visibility = ["//visibility:public"])
+
+wpilib_cc_library(
+    name = "ni-libraries",
+    srcs = [
+        "@ni-netcomm-linuxathena-libs//:shared_libs",
+        "@ni-chipobject-linuxathena-libs//:shared_libs",
+        "@ni-visa-linuxathena-libs//:shared_libs",
+        "@ni-runtime-linuxathena-libs//:shared_libs",
+    ],
+    raw_deps = [
+        "@ni-netcomm-headers//:headers",
+        "@ni-chipobject-headers//:headers",
+        "@ni-visa-headers//:headers",
+
+    ],
+    linkstatic=1,
+)
